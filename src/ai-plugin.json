@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Local Files",
+    "name_for_model": "localfiles",
+    "description_for_human": "Read local files with ChatGPT.",
+    "description_for_model": "Read local files with this plugin. This plugin offers read-only capabilities. If the file is plaintext format (like text files or code), this plugin will return that text. If the file is not plaintext format (like Word Document or PDF), this plugin will extract text from the file and return that text. When discussing code with the user, use this plugin to first check if such a file exists, and then read the contents of the file, before responding in order to make sure you are using the most up-to-date version of the file. Since you cannot write any files, respond to the user with your suggestions and code per your original instructions.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "http://localhost:9000/openapi.yaml",
+        "is_user_authenticated": false
+    },
+    "logo_url": "http://localhost:9000/icon.png",
+    "contact_email": "me@samrawal.com",
+    "legal_info_url": "https://labs.cactiml.com/legal"
+}

@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: Local Files
+  version: 0.1
+servers:
+  - url: http://localhost:9000
+paths:
+  /get_filenames:
+    get:
+      operationId: get_filenames
+      summary: Get a list of files in this project. If there are more than 100 files within a directory, the directory will be ignored. Use "subdirectory_path" parameter to look within a subdirectory. If you want to search the entire base directory, simply pass in "/" to the "subdirectory_path" parameter. 
+      parameters:
+        - name: subdirectory_path
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /get_file_content:
+    get:
+      operationId: get_file_content
+      summary: Get the content of a specific file in this project
+      parameters:
+        - name: filepath
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: string
+  /list_directories:
+    get:
+      operationId: list_directories
+      summary: Get a list of directories in a specified path. If no path is provided, it will list the directories in the base path.
+      parameters:
+        - name: path
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
