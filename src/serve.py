@@ -6,9 +6,7 @@ import utils
 
 app = Flask(__name__)
 CORS(app)  # This will enable CORS for all routes
-base_path = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
-print(f"Starting server. Base path: {base_path}")
-
+base_path = ""
 
 @app.route("/get_filenames", methods=["GET"])
 def get_filenames():
@@ -24,8 +22,6 @@ def list_directories():
     directories = utils.list_directories(path)
     return jsonify(directories)
 
-
-
 @app.route("/get_file_content", methods=["GET"])
 def get_file_content():
     filepath = request.args.get("filepath")
@@ -39,28 +35,12 @@ def get_file_content():
 
     return jsonify({"content": content})
 
-
-@app.route("/.well-known/ai-plugin.json", methods=["GET"])
-def plugin_manifest():
-    host = request.headers["Host"]
-    with open("ai-plugin.json") as f:
-        text = f.read()
-        return Response(text, mimetype="text/json")
-
-
-@app.route("/openapi.yaml", methods=["GET"])
-def openapi_spec():
-    host = request.headers["Host"]
-    with open("openapi.yaml") as f:
-        text = f.read()
-        # text = text.replace("PLUGIN_HOSTNAME", f"https://{host}")
-        return Response(text, mimetype="text/yaml")
-
-
-@app.route("/icon.png", methods=["GET"])
-def get_icon():
-    return send_file("stack_icon.png", mimetype="image/png")
-
+def run_server(basepath=None):
+    global base_path
+    if basepath:
+        base_path = basepath
+    app.run(host="0.0.0.0", port=9000)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=9000)
+    basepath = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
+    run_server(basepath)
