@@ -2,6 +2,7 @@ import os
 import PyPDF2
 from docx import Document
 
+
 def get_filenames(path):
     filepaths = []
     for dirpath, dirnames, filenames in os.walk(path):
@@ -9,8 +10,10 @@ def get_filenames(path):
             filepaths.append(os.path.join(dirpath, filename))
     return filepaths
 
+
 def list_directories(path):
     return [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
+
 
 def read_file(filepath):
     if filepath.endswith(".pdf"):

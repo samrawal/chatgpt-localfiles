@@ -8,19 +8,29 @@ app = Flask(__name__)
 CORS(app)  # This will enable CORS for all routes
 base_path = ""
 
+
 @app.route("/get_filenames", methods=["GET"])
 def get_filenames():
     filepath = base_path + "/" + request.args.get("subdirectory_path", "")
     filepaths = utils.get_filenames(filepath)
     if len(filepaths) > 100:
-        return jsonify({"error": "More than 100 files in the directory provided. Please specify a subdirectory instead."}), 400
+        return (
+            jsonify(
+                {
+                    "error": "More than 100 files in the directory provided. Please specify a subdirectory instead."
+                }
+            ),
+            400,
+        )
     return jsonify(filepaths)
+
 
 @app.route("/list_directories", methods=["GET"])
 def list_directories():
     path = base_path + "/" + request.args.get("path", "")
     directories = utils.list_directories(path)
     return jsonify(directories)
+
 
 @app.route("/get_file_content", methods=["GET"])
 def get_file_content():
@@ -35,11 +45,13 @@ def get_file_content():
 
     return jsonify({"content": content})
 
+
 def run_server(basepath=None):
     global base_path
     if basepath:
         base_path = basepath
     app.run(host="0.0.0.0", port=9000)
+
 
 if __name__ == "__main__":
     basepath = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
