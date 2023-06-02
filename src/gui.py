@@ -2,23 +2,23 @@ import rumps
 import threading
 import sys
 import serve
+from PyQt5.QtWidgets import QFileDialog, QApplication
+import sys
 
 class PythonServer(rumps.App):
     def __init__(self):
         super(PythonServer, self).__init__("Python Server")
 
-        window = rumps.Window(message='Enter the base directory to share with ChatGPT:', title='ChatGPT Code Share', default_text='', dimensions=(320, 20), cancel=True)
-        window.icon = None
-        response = window.run()
+        app = QApplication(sys.argv)
+        folder_selected = QFileDialog.getExistingDirectory(None, "Select Folder")  # Open the folder picker dialog
 
-        if len(response.text) == 0:
+        if not folder_selected:
             exit()
 
-        self.server_thread = threading.Thread(target=serve.run_server, args=(response.text.strip(),))
+        self.server_thread = threading.Thread(target=serve.run_server, args=(folder_selected,))
         self.server_thread.start()
-        self.title = "🚀 Code Sharing On"
+        self.title = "\ud83d\ude80 Code Sharing On"
         #rumps.notification(title='Python Server', subtitle='Server Status', message='Server is running!')
-
 
 if __name__ == "__main__":
     PythonServer().run()
