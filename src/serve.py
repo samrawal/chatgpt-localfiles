@@ -44,13 +44,34 @@ def get_file_content():
         return jsonify({"error": "Unable to read file", "details": str(e)}), 500
 
     return jsonify({"content": content})
+@app.route("/.well-known/ai-plugin.json", methods=["GET"])
+def plugin_manifest():
+    host = request.headers["Host"]
+    with open("ai-plugin.json") as f:
+        text = f.read()
+        return Response(text, mimetype="text/json")
+
+
+@app.route("/openapi.yaml", methods=["GET"])
+def openapi_spec():
+    host = request.headers["Host"]
+    with open("openapi.yaml") as f:
+        text = f.read()
+        # text = text.replace("PLUGIN_HOSTNAME", f"https://{host}")
+        return Response(text, mimetype="text/yaml")
+
+
+@app.route("/icon.png", methods=["GET"])
+def get_icon():
+    return send_file("stack_icon.png", mimetype="image/png")
+
 
 
 def run_server(basepath=None):
     global base_path
     if basepath:
         base_path = basepath
-    app.run(host="0.0.0.0", port=9000)
+    app.run(host="0.0.0.0", port=9900)
 
 
 if __name__ == "__main__":

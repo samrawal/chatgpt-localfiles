@@ -9,10 +9,10 @@
     },
     "api": {
         "type": "openapi",
-        "url": "http://localhost:9000/openapi.yaml",
+        "url": "http://localhost:9900/openapi.yaml",
         "is_user_authenticated": false
     },
-    "logo_url": "http://localhost:9000/icon.png",
+    "logo_url": "http://localhost:9900/icon.png",
     "contact_email": "me@samrawal.com",
     "legal_info_url": "https://labs.cactiml.com/legal"
 }

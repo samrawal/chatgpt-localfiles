@@ -7,7 +7,7 @@ def get_filenames(path):
     filepaths = []
     for dirpath, dirnames, filenames in os.walk(path):
         for filename in filenames:
-            filepaths.append(os.path.join(dirpath, filename))
+            filepaths.append(os.path.normpath(os.path.join(dirpath, filename)))
     return filepaths
 
 

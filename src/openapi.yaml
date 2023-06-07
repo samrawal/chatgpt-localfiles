@@ -3,7 +3,7 @@ info:
   title: Local Files
   version: 0.1
 servers:
-  - url: http://localhost:9000
+  - url: http://localhost:9900
 paths:
   /get_filenames:
     get:
