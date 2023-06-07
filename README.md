@@ -9,6 +9,8 @@ The core idea is based on something implemented in [kesor's fantastic chatgpt-co
 
 You need Plugin Developer access for this.
 
+![Screenshot 1](./assets/screenshot1.png)
+
 # Setup
 
 ## 1. Clone the repository and install requirements
