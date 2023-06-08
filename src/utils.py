@@ -18,10 +18,10 @@ def list_directories(path):
 def read_file(filepath):
     if filepath.endswith(".pdf"):
         with open(filepath, "rb") as file:
-            reader = PyPDF2.PdfFileReader(file)
+            reader = PyPDF2.PdfReader(file)
             content = ""
-            for page in range(reader.getNumPages()):
-                content += reader.getPage(page).extractText()
+            for page in range(len(reader.pages)):
+                content += reader.pages[page].extract_text().strip() + " " 
         return content
     elif filepath.endswith(".docx"):
         doc = Document(filepath)
