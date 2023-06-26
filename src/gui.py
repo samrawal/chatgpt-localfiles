@@ -22,7 +22,7 @@ class PythonServer(rumps.App):
             target=serve.run_server, args=(folder_selected,)
         )
         self.server_thread.start()
-        self.title = "\ud83d\ude80 ChatGPT Code Sharing"
+        self.title = "\ud83d\ude80 File Sharing"
         # rumps.notification(title='Python Server', subtitle='Server Status', message='Server is running!')
 
 
