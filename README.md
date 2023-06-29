@@ -1,5 +1,9 @@
 # ChatGPT Local Files Plugin
 
+<p align="center">
+  <img src="./src/stack_icon.png" alt="Icon" width="200">
+</p>
+
 This plugin makes your local files accessible to ChatGPT via local plugin; allowing you to ask questions and interact with files via chat. Features and use-cases:
 
 - Point to the base directory of code, allowing ChatGPT to read your existing code and any changes you make throughout the chat
